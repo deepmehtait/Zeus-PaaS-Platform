@@ -1,0 +1,85 @@
+var express = require('express');
+var router = express.Router();
+var fs = require('fs');
+var repo_list;
+var users = require("./models/zeus.js");
+var sys = require('sys');
+var execute = require('child_process').exec;
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { title: 'Zeus'});
+});
+
+router.post('/login', function(req,res) {
+	
+	users.findOne({username:req.body.username, password:req.body.password},function(err,user){
+			if(err)
+				res.send(err)
+			if(user == null)
+			  res.render('index', { title: 'Zeus' });
+			else
+			{
+				repo_list = fs.readdirSync("./user_repositories/"+user.username+"/", function (error, list){
+					return list;
+				});
+				req.session.username = req.body.username;
+				res.render('login', {title: 'Zeus', name: user.username , repository_list : repo_list });			
+			}
+		});
+});
+
+router.get('/login', function(req,res){
+	var username = req.session.username;
+	repo_list = fs.readdirSync("./user_repositories/"+username+"/", function (error, list){
+					return list;
+	});
+	res.render('login', {title: 'Zeus', name: username , repository_list : repo_list });
+});
+
+
+router.get('/repository/:repo', function(req,res){
+	var username = req.session.username;
+	
+	repo_list = fs.readdirSync("./user_repositories/"+ username +"/" + req.params.repo , function(error,list){
+		return list;
+	});
+	console.log(repo_list);
+	res.render('repository', {title : 'Zeus' , username : username , repository_name : req.params.repo ,folder_structure : repo_list, 
+															file_content : " "});
+});
+
+
+router.get('/createRepo', function(req, res){
+	res.render('createRepo',{title : "Zeus"})
+});
+
+router.get('/submit_repo_info', function(req,res){
+	var username = req.session.username;
+//	console.log(req.param('repo_name'));
+	function puts(error, stdout, stderr) { console.log(stdout); }
+	execute("cd user_repositories/"+username+" && express "+ req.param('repo_name') +" -ejs", puts);
+//res.set({"username":username});
+	res.redirect('/login');
+});
+
+
+router.get('/repository/:repo/:file_name',function(req,res){
+	var username = req.session.username;
+	var content = fs.readFileSync('./user_repositories/'+username+'/'+req.params.repo+"/"+req.params.file_name, 'utf8', function (err,data) {
+  	if (err) {
+    	return console.log(err);
+  	}
+  	return data;
+	});
+	res.render('repository', {title : 'Zeus' , username : username , repository_name : req.params.repo ,folder_structure : repo_list, 
+															file_content : content});
+});
+
+
+router.post('/submit_file',function(req,res){
+	console.log(req.body.content);
+});
+
+
+module.exports = router;

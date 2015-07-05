@@ -1,0 +1,308 @@
+extends layout
+
+block body
+
+ .dashboard
+    .row
+      .col-lg-12
+        .jumbotron
+          h1 Zeus Code Editor
+    div
+      | Features implemented in editor are : 
+      ol
+        li Ctrl-Space suggestions and hints.
+        li Javascript, json, xml language  support.
+        li Real time code lint.
+        li Full screen editor support
+        li Auto bracket close
+        li
+          | Different Editor themes. My personal fav are ambiance, night, pastel-on-dark, the-matrix, vibrant-ink, xq-dark but feel free to check other themes and fix theme for our project.
+      |  
+      |       
+      h4  Edit code 
+      |       
+      p
+        | Select a theme: 
+        select#select(onchange='selectTheme()')
+          option default
+          |     
+          option 3024-day
+          |     
+          option 3024-night
+          |     
+          option(selected='') ambiance
+          |     
+          option base16-dark
+          |     
+          option base16-light
+          |     
+          option blackboard
+          |     
+          option cobalt
+          |     
+          option eclipse
+          |     
+          option elegant
+          |     
+          option erlang-dark
+          |     
+          option lesser-dark
+          |     
+          option mbo
+          |     
+          option mdn-like
+          |     
+          option midnight
+          |     
+          option monokai
+          |     
+          option neat
+          |     
+          option neo
+          |     
+          option night
+          |     
+          option paraiso-dark
+          |     
+          option paraiso-light
+          |     
+          option pastel-on-dark
+          |     
+          option rubyblue
+          |     
+          option solarized dark
+          |     
+          option solarized light
+          |     
+          option the-matrix
+          |     
+          option tomorrow-night-eighties
+          |     
+          option twilight
+          |     
+          option vibrant-ink
+          |     
+          option xq-dark
+          |     
+          option xq-light
+        img(width='30 px', height='30 px', src='img/fullscreen-128.png', onclick='FullScreen();')
+        | Enter Full Screen Mode.(Press Esc key to exit Full screen Mode)
+      |      
+      |       
+      div
+          textarea#code(name='code')
+            | //This file is responsible for
+            | //creating a new subdomain
+            | //creating new applications for a user
+            | //start an application
+            | //The Server will be running on port 3001
+            | //so if a user wants to create an app then he can make a request
+            | //http: ****.***:3001/createDomain/
+            | //post eg. {&quot;domainName&quot;:&quot;user2&quot;}
+            | //http: ****.***:3001/createApp/
+            | //post eg. {&quot;userId&quot;:&quot;user2&quot;, &quot;appName&quot;:&quot;app1&quot;}
+            | //http: ****.***:3001/startApp/
+            | //post eg. {&quot;userId&quot;:&quot;user2&quot;, &quot;appName&quot;:app1&quot;}
+            | /* Module dependencies.
+            | */
+            | var express = require(&apos;express&apos;)
+            | , http = require(&apos;http&apos;)
+            | , path = require(&apos;path&apos;)
+            | ,zones = require(&apos;./routes/createdomain&apos;)
+            | , httpProxy = require(&apos;http-proxy&apos;)
+            | , childprocess = require(&apos;child_process&apos;),
+            | spawn = require(&apos;child_process&apos;).spawn;
+            | var favicon                     = require(&apos;serve-favicon&apos;);
+            | var logger                              = require(&apos;morgan&apos;);
+            | var cookieParser        = require(&apos;cookie-parser&apos;);
+            | var bodyParser          = require(&apos;body-parser&apos;);
+            | var mongoose                    = require(&apos;mongoose&apos;); // mongoose for mongodb
+            | var expressSession = require(&apos;express-session&apos;) // Sessions
+            | var routes = require(&apos;./routes/index&apos;);
+            | var users = require(&apos;./routes/users&apos;);
+            | var app = express();
+            | ///Port 3000-3001 for Zeus&apos;s setup
+            | var ports=3001;
+            | var storage=&quot;&quot;; // json storage for temporary purpose
+            | var start_file = &apos;app.js&apos;;
+            | var responseLog;
+            | //Applications Port will be running after port 3010
+            | var app_port = 3010;
+            | // Configuration of Mongodb
+            | //mongoose.connect(&apos;mongodb://localhost:27017/zeus&apos;);
+            | //Configuration
+            | app.set(&apos;view engine&apos;, &apos;ejs&apos;);
+            | app.set(&apos;port&apos;, process.env.PORT || 3001);
+            | app.set(&apos;views&apos;, __dirname + &apos;/views&apos;);
+            | app.use(cookieParser());
+            | app.use(express.static(path.join(__dirname, &apos;public&apos;)));
+            | app.use(expressSession({secret: &apos;zeus needs secret&apos;, maxAge : 86400000}));
+            | app.use(express.static(path.join(__dirname, &apos;public&apos;)));
+            | app.use(bodyParser.urlencoded());
+            | app.use(bodyParser.json());
+            | //development
+            | //app.configure(&apos;development&apos;, function(){
+            | //  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+            | //});
+            | //Produciton
+            | //app.configure(&apos;production&apos;, function(){
+            | //  app.use(express.errorHandler());
+            | //});
+            | //************************
+            | //Error Handlers
+            | // development error handler
+            | // will print stacktrace
+            | //Error Handlers
+            | //*****************************
+            | app.get(&apos;/&apos;, routes);
+            | app.post(&apos;/login&apos;,function (req,res){
+            | res.send(&quot;login hit&quot;);
+            | });
+            | app.get(&apos;/index&apos;,function(req,res,next){
+            | if (!path.extname(req.url)){
+            | var ip = req.connection.remoteAddress || req.socket.remoteAddress;
+            | if (req.headers[&quot;x-real-ip&quot;]) ip = req.headers[&quot;x-real-ip&quot;];
+            | var toEmit = {
+            | ip     : ip,
+            | url    : req.url,
+            | time   : new Date(),
+            | method : req.method,
+            | host   : req.headers.host,
+            | };
+            | console.log(&quot;Emitter: &quot;+JSON.stringify(toEmit));
+            | //dash.emit(&apos;nodester::incomingRequest&apos;, toEmit);
+            | }
+            | res.render(&apos;index&apos;,{title: &quot;express&quot;});
+            | });
+            | //To create a new Sub-domain
+            | // Utsav&apos;s code below
+            | app.post(&apos;/createDomain&apos;,function(req,res)
+            | {
+            | var domain_name = req.body.domainName;
+            | //Arguments needs to be changed according to AWS dns settings
+            | var args = {
+            | zoneId : &quot;Z2WHLIJ6XNK5AG&quot;,
+            | name : domain_name + &apos;.utsavpopli.me&apos;,
+            | type : &quot;A&quot;,
+            | ttl : 700,
+            | values : [
+            | &apos;54.183.142.127&apos;
+            | ]
+            | };
+            | zones.createDomain(args);
+            | res.send(&quot;Domain created&quot;);
+            | });
+            | //To create a new app for the user
+            | //Condition : Assuming User is already registered and the directory related to
+            | //the user is already there
+            | app.post(&quot;/createApp&quot;,function(req,res){
+            | responseLog = &quot;&quot;;
+            | var userId = req.body.userId;
+            | var appName = req.body.appName;
+            | console.log(&quot;creating app:&quot;+ appName);
+            | var cmd1 = &quot;sudo mkdir ~/userApps/&quot;+userId+&quot;/&quot;+appName;
+            | var cmd2 = &apos; &amp;&amp; sudo cp -rf default_express_js/* ~/userApps/&apos; + userId+ &quot;/&quot;+appName+&quot;/&quot;;
+            | var cmd3  = &quot; &amp;&amp; cd ~/userApps/&quot;+userId + &quot;/&quot; + appName + &quot; &amp;&amp; npm install &quot;;
+            | var cmd = cmd1 + cmd2 + cmd3;
+            | var ls = childprocess.exec(cmd,function(error, stdout,stderr){
+            | if (error) {
+            | console.log(error.stack);
+            | console.log(&apos;Error code: &apos;+error.code);
+            | console.log(&apos;Signal received: &apos;+error.signal);
+            | responseLog = &quot;Error code &quot; + error.code + &quot;Signal received: &quot;+ error.signal;
+            | }
+            | console.log(&apos;Child Process STDOUT: &apos;+stdout);
+            | console.log(&apos;Child Process STDERR: &apos;+stderr);
+            | responseLog = &quot;stdout: &quot; + stdout + &quot;stderr : &quot;+ stderr;
+            | });
+            | ls.on(&apos;exit&apos;, function (code) {
+            | console.log(&apos;Child process exited with exit code &apos;+code);
+            | res.send(&quot;some error occured.&quot;);
+            | });
+            | //res.render(&apos;index&apos;,{message: &quot;initialized the app: &quot; + appName + &quot; on port:&quot; + ports-1,title: &quot;express&quot;});
+            | });
+            | //To start an application
+            | app.post(&apos;/startApp&apos;, function(req,res){
+            | var userId = req.body.userId;
+            | var appName  = req.body.appName;
+            | var response_log =&quot;&quot;;
+            | var opts = {
+            | cwd:&quot;/home/ubuntu/userApps/&quot;+userId+&quot;/&quot;+appName,
+            | env : process.env
+            | }
+            | opts.env[&quot;PORT&quot;] = app_port;
+            | app_port++;
+            | var spawn_ls =  spawn(&quot;nodemon&quot;,[&quot;./&quot;+start_file],opts);
+            | spawn_ls.stdout.on(&apos;data&apos;, function (data) {
+            | console.log(&apos;stdout: &apos; + data);
+            | var output = &apos;processoutput=&apos; + data;
+            | response_log = response_log+output;
+            | });
+            | spawn_ls.stderr.on(&apos;data&apos;, function (data) {
+            | console.log(&apos;stderr: &apos; + data);
+            | var output = &apos;processoutput=&apos; + data;
+            | response_log = output;
+            | });
+            | spawn_ls.on(&apos;exit&apos;, function (code) {
+            | console.log(&quot;exited : &quot; + code );
+            | });
+            | spawn_ls.stdout.on(&quot;close&quot;,function(code){
+            | res.send(response_log);
+            | console.log(&quot;stdio finished: &quot;+code);
+            | });
+            | console.log(&quot;collecting response: &quot;+response_log);
+            | res.send(response_log);
+            | });
+            | // add test post api
+            | app.post(&apos;/deeptest&apos;,function(req,res){
+            | var userID=req.body.userId;
+            | var appName=req.body.appName;
+            | console.log(&quot;use id =&quot;+userID+&quot; appName=&quot;+appName);
+            | res.send(&quot;hello&quot;);
+            | });
+            | app.post(&apos;/view_all_domains&apos;, function(req,res){
+            | storage= storage.split(&quot;,&quot;);
+            | res.render(&apos;view_all_domains&apos;,{storage:storage});
+            | //res.send(&quot;All Domains:&quot;);
+            | });
+            | http.createServer(app).listen(app.get(&apos;port&apos;), function(){
+            | console.log(&apos;Main Express server listening on port &apos; + app.get(&apos;port&apos;));
+            | });
+    |  
+
+    include footer.jade
+        div &nbsp
+        div &nbsp
+  
+      script(type='text/javascript').
+        var myCodeMirror = CodeMirror(document.body);
+        CodeMirror.commands.autocomplete = function(cm) {
+        cm.showHint({hint: CodeMirror.hint.anyword});
+        }
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        mode: "javascript",
+        gutters: ["CodeMirror-lint-markers"],
+        lint: true,
+        extraKeys: {"Ctrl-Space": "autocomplete","F11": function(cm) {
+        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        "Esc": function(cm) {
+        if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }},
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        theme:"ambiance",
+        lineWrapping: true,
+        styleActiveLine: true
+        });
+        var input = document.getElementById("select");
+        function selectTheme() {
+        var theme = input.options[input.selectedIndex].innerHTML;
+        editor.setOption("theme", theme);
+        }
+        function FullScreen(){
+        editor.setOption("fullScreen","fullScreen");
+        }
+
+        

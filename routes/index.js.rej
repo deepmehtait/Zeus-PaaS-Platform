@@ -1,0 +1,26 @@
+diff a/routes/index.js b/routes/index.js	(rejected hunks)
+@@ -3,18 +3,23 @@
+  var passport = require('passport');
+  var StormpathStrategy = require('passport-stormpath');
+  var stormpath = require('stormpath');
+- var userDetails = require('./models/zeusModel.js');
++ var storeInfo = require('./models/zeusModel.js');
+  var mongoose = require('mongoose');
+++<<<<<<< HEAD
+ +var zones = require('./createdomain.js');
+ +
+ +
+ +mongoose.connect('mongodb://localhost:27017/zeus', function(error){
+ +	if(error){
+ +	console.log("Unable to connect to database " + error);
+ +}
+ +} );
+ +
+ +//Render the home page.
+++=======
++ mongoose.connect('mongodb://localhost:27017/zeus');
++ // Render the home page.
+++>>>>>>> Commit
+  router.get('/', function(req, res) {
+    res.render('index', { title: 'Home', user: req.user });
+  });

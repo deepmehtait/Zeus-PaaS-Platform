@@ -1,0 +1,75 @@
+<html>
+
+<head>
+
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>		
+
+		<script type="text/javascript">
+
+		function send()
+
+		{
+
+		
+
+				var data = {};
+
+					data.title = "title";
+
+					data.message = "message";
+
+					
+
+					$.ajax({
+
+						type: 'get',
+
+						data: JSON.stringify(data),
+
+				        contentType: 'application/json',
+
+                        url: 'http://54.183.136.139:3006/endpoint',						
+
+                        success: function(data) {
+
+						alert("success");
+
+                            console.log('success');
+
+                            console.log(JSON.stringify(data));
+
+                        }
+
+                    });
+
+		}
+		function getsome()
+{
+$.getJSON( 'http://54.183.136.139:3006/endpoint', function () { console.log("success"); } );
+}
+
+		
+
+</script>
+
+</head>
+
+
+
+<body>
+
+<button onclick="send();">
+
+send
+
+</button>
+<br/>
+<button onclick="getsome();">
+
+get
+
+</button>
+
+</body>
+
+</html>

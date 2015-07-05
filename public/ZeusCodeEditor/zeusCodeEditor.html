@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+  <head>
+<link rel=stylesheet href="css/docs.css">
+<!-- initilize code editor with line number -->
+<link rel="stylesheet" href="css/codemirror.css">
+<link rel="stylesheet" href="css/show-hint.css">
+<link rel="stylesheet" href="css/fullscreen.css">
+<link rel="stylesheet" href="css/lint.css">
+<!-- below css are for code editor's theme -->
+<link rel="stylesheet" href="theme/3024-day.css">
+<link rel="stylesheet" href="theme/3024-night.css">
+<link rel="stylesheet" href="theme/ambiance.css">
+<link rel="stylesheet" href="theme/base16-dark.css">
+<link rel="stylesheet" href="theme/base16-light.css">
+<link rel="stylesheet" href="theme/blackboard.css">
+<link rel="stylesheet" href="theme/cobalt.css">
+<link rel="stylesheet" href="theme/eclipse.css">
+<link rel="stylesheet" href="theme/elegant.css">
+<link rel="stylesheet" href="theme/erlang-dark.css">
+<link rel="stylesheet" href="theme/lesser-dark.css">
+<link rel="stylesheet" href="theme/mbo.css">
+<link rel="stylesheet" href="theme/mdn-like.css">
+<link rel="stylesheet" href="theme/midnight.css">
+<link rel="stylesheet" href="theme/monokai.css">
+<link rel="stylesheet" href="theme/neat.css">
+<link rel="stylesheet" href="theme/neo.css">
+<link rel="stylesheet" href="theme/night.css">
+<link rel="stylesheet" href="theme/paraiso-dark.css">
+<link rel="stylesheet" href="theme/paraiso-light.css">
+<link rel="stylesheet" href="theme/pastel-on-dark.css">
+<link rel="stylesheet" href="theme/rubyblue.css">
+<link rel="stylesheet" href="theme/solarized.css">
+<link rel="stylesheet" href="theme/the-matrix.css">
+<link rel="stylesheet" href="theme/tomorrow-night-eighties.css">
+<link rel="stylesheet" href="theme/twilight.css">
+<link rel="stylesheet" href="theme/vibrant-ink.css">
+<link rel="stylesheet" href="theme/xq-dark.css">
+<link rel="stylesheet" href="theme/xq-light.css">
+<!-- jquery 2.1.0 minified version -->
+<script src="js/jquery-2.1.0.min.js"></script>
+<!-- main code editor library -->
+<script src="lib/codemirror.js"></script>
+<!-- code editor feature enhancements -->
+<script src="lib/closebrackets.js"></script>
+<script src="lib/fullscreen.js"></script>
+<script src="languagemode/jshints.js"></script>
+<script src="lib/active-line.js"></script>
+<!-- code editor hint -->
+<script src="lib/show-hint.js"></script>
+<script src="lib/anyword-hint.js"></script>
+<script src="lib/javascript-hint.js"></script>
+<!-- lint -->
+<script src="lib/lint.js"></script>
+<script src="lib/javascript-lint.js"></script>
+<script src="lib/json-lint.js"></script>
+<script src="lib/css-lint.js"></script>
+
+<!-- code editor language support -->
+<script src="languagemode/javascript.js"></script>
+<script src="languagemode/xquery.js"></script>
+<script src="languagemode/xml.js"></script>
+
+
+    <title>Code Editor</title>
+      </head>
+  <body>
+
+    <div  align="center">
+      <h1>Zeus Code Editor</h1>
+		</div>
+		<div>
+  Features implemented in editor are : 
+<ol><li>Ctrl-Space suggestions and hints.</li>
+<li>Javascript, json, xml language  support.</li>
+<li>Real time code lint.</li>
+<li>Full screen editor support</li>
+<li>Auto bracket close</li>
+<li>Different Editor themes. My personal fav are ambiance, night, pastel-on-dark, the-matrix, vibrant-ink, xq-dark but feel free to check other themes and fix theme for our project.</li>
+</ol> 
+      <h4> Edit code </h4>
+      <p>Select a theme: <select onchange="selectTheme()" id="select">
+    <option>default</option>
+    <option>3024-day</option>
+    <option>3024-night</option>
+    <option selected>ambiance</option>
+    <option>base16-dark</option>
+    <option>base16-light</option>
+    <option>blackboard</option>
+    <option>cobalt</option>
+    <option>eclipse</option>
+    <option>elegant</option>
+    <option>erlang-dark</option>
+    <option>lesser-dark</option>
+    <option>mbo</option>
+    <option>mdn-like</option>
+    <option>midnight</option>
+    <option>monokai</option>
+    <option>neat</option>
+    <option>neo</option>
+    <option>night</option>
+    <option>paraiso-dark</option>
+    <option>paraiso-light</option>
+    <option>pastel-on-dark</option>
+    <option>rubyblue</option>
+    <option>solarized dark</option>
+    <option>solarized light</option>
+    <option>the-matrix</option>
+    <option>tomorrow-night-eighties</option>
+    <option>twilight</option>
+    <option>vibrant-ink</option>
+    <option>xq-dark</option>
+    <option>xq-light</option>
+</select>
+<img width="30 px" height="30 px"src="img/fullscreen-128.png" onClick="FullScreen();">Enter Full Screen Mode.(Press Esc key to exit Full screen Mode)
+</p>
+     </article>
+      <div>
+		<textarea id="code" name="code">
+//This file is responsible for 
+//creating a new subdomain 
+//creating new applications for a user 
+//start an application 
+
+
+//The Server will be running on port 3001 
+//so if a user wants to create an app then he can make a request 
+
+//http: ****.***:3001/createDomain/
+//post eg. {"domainName":"user2"}
+
+//http: ****.***:3001/createApp/
+//post eg. {"userId":"user2", "appName":"app1"}
+
+//http: ****.***:3001/startApp/
+//post eg. {"userId":"user2", "appName":app1"}
+
+
+
+ /* Module dependencies.
+ */
+
+var express = require('express')
+  , http = require('http')
+  , path = require('path')
+  ,zones = require('./routes/createdomain')
+  , httpProxy = require('http-proxy')
+  , childprocess = require('child_process'),
+spawn = require('child_process').spawn;
+
+var favicon                     = require('serve-favicon');
+var logger                              = require('morgan');
+var cookieParser        = require('cookie-parser');
+var bodyParser          = require('body-parser');
+var mongoose                    = require('mongoose'); // mongoose for mongodb
+var expressSession = require('express-session') // Sessions
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+var app = express();
+
+///Port 3000-3001 for Zeus's setup 
+var ports=3001;
+var storage=""; // json storage for temporary purpose
+var start_file = 'app.js';
+var responseLog;
+//Applications Port will be running after port 3010
+
+var app_port = 3010;
+
+
+// Configuration of Mongodb
+//mongoose.connect('mongodb://localhost:27017/zeus');
+
+//Configuration
+
+app.set('view engine', 'ejs');
+app.set('port', process.env.PORT || 3001);
+app.set('views', __dirname + '/views');
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({secret: 'zeus needs secret', maxAge : 86400000}));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+
+//development 
+//app.configure('development', function(){
+//  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+//});
+
+//Produciton
+//app.configure('production', function(){
+//  app.use(express.errorHandler());
+//});
+
+//************************
+//Error Handlers
+
+
+// development error handler
+// will print stacktrace
+//Error Handlers 
+//*****************************                                                 
+                                                              
+app.get('/', routes);
+app.post('/login',function (req,res){
+res.send("login hit");
+
+});
+app.get('/index',function(req,res,next){
+	  if (!path.extname(req.url)){
+	    var ip = req.connection.remoteAddress || req.socket.remoteAddress;
+	    if (req.headers["x-real-ip"]) ip = req.headers["x-real-ip"];
+	    var toEmit = {
+	      ip     : ip,
+	      url    : req.url,
+	      time   : new Date(),
+	      method : req.method,
+	      host   : req.headers.host,
+	    };
+	    console.log("Emitter: "+JSON.stringify(toEmit));
+	    //dash.emit('nodester::incomingRequest', toEmit);
+	    
+	  }
+	  res.render('index',{title: "express"});
+});
+
+
+//To create a new Sub-domain
+// Utsav's code below
+app.post('/createDomain',function(req,res)
+{
+var domain_name = req.body.domainName;
+//Arguments needs to be changed according to AWS dns settings
+var args = { 
+zoneId : "Z2WHLIJ6XNK5AG",
+name : domain_name + '.utsavpopli.me',
+type : "A",
+ttl : 700, 
+values : [
+'54.183.142.127'
+]
+};
+zones.createDomain(args);
+res.send("Domain created");
+});
+
+
+//To create a new app for the user 
+//Condition : Assuming User is already registered and the directory related to 
+//the user is already there 
+app.post("/createApp",function(req,res){
+responseLog = "";
+
+var userId = req.body.userId;
+var appName = req.body.appName;
+console.log("creating app:"+ appName);
+var cmd1 = "sudo mkdir ~/userApps/"+userId+"/"+appName;
+var cmd2 = ' && sudo cp -rf default_express_js/* ~/userApps/' + userId+ "/"+appName+"/";
+var cmd3  = " && cd ~/userApps/"+userId + "/" + appName + " && npm install ";
+var cmd = cmd1 + cmd2 + cmd3;
+var ls = childprocess.exec(cmd,function(error, stdout,stderr){
+if (error) {
+         console.log(error.stack);
+         console.log('Error code: '+error.code);
+         console.log('Signal received: '+error.signal);
+    	responseLog = "Error code " + error.code + "Signal received: "+ error.signal;
+    	
+       }
+       console.log('Child Process STDOUT: '+stdout);
+       console.log('Child Process STDERR: '+stderr);
+    responseLog = "stdout: " + stdout + "stderr : "+ stderr;
+
+     }); 
+
+    ls.on('exit', function (code) {
+       console.log('Child process exited with exit code '+code);
+       res.send("some error occured.");
+     });	
+
+//res.render('index',{message: "initialized the app: " + appName + " on port:" + ports-1,title: "express"});
+});
+
+
+//To start an application 
+app.post('/startApp', function(req,res){
+
+var userId = req.body.userId;
+var appName  = req.body.appName;
+var response_log ="";
+var opts = {
+cwd:"/home/ubuntu/userApps/"+userId+"/"+appName,
+env : process.env
+}            
+
+opts.env["PORT"] = app_port;
+app_port++;
+var spawn_ls =  spawn("nodemon",["./"+start_file],opts);
+
+spawn_ls.stdout.on('data', function (data) {
+             console.log('stdout: ' + data);
+            var output = 'processoutput=' + data;
+         	response_log = response_log+output;
+		 });
+
+         spawn_ls.stderr.on('data', function (data) {
+             console.log('stderr: ' + data);
+            var output = 'processoutput=' + data;
+		response_log = output;
+          });
+
+          spawn_ls.on('exit', function (code) {
+		console.log("exited : " + code );
+          });
+spawn_ls.stdout.on("close",function(code){
+res.send(response_log);
+console.log("stdio finished: "+code);
+});
+console.log("collecting response: "+response_log);
+res.send(response_log);
+
+});
+
+
+
+// add test post api 
+app.post('/deeptest',function(req,res){
+	var userID=req.body.userId;
+	var appName=req.body.appName;
+	console.log("use id ="+userID+" appName="+appName);
+	
+	res.send("hello");
+});
+
+app.post('/view_all_domains', function(req,res){
+        storage= storage.split(",");
+        res.render('view_all_domains',{storage:storage});
+        //res.send("All Domains:");
+});
+
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Main Express server listening on port ' + app.get('port'));
+  
+});</textarea>
+ <article>
+     <script type="text/javascript">
+var myCodeMirror = CodeMirror(document.body);
+  CodeMirror.commands.autocomplete = function(cm) {
+        cm.showHint({hint: CodeMirror.hint.anyword});
+      }
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        mode: "javascript",
+	    gutters: ["CodeMirror-lint-markers"],
+		lint: true,
+		extraKeys: {"Ctrl-Space": "autocomplete","F11": function(cm) {
+          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        "Esc": function(cm) {
+          if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }},
+		matchBrackets: true,
+		autoCloseBrackets: true,
+		theme:"ambiance",
+		lineWrapping: true,
+		styleActiveLine: true
+		});
+	  
+        
+	  var input = document.getElementById("select");
+  function selectTheme() {
+    var theme = input.options[input.selectedIndex].innerHTML;
+    editor.setOption("theme", theme);
+  }
+  function FullScreen(){
+	  editor.setOption("fullScreen","fullScreen");
+	  }
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,93 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(content='IE=edge', http-equiv='X-UA-Compatible')
+    meta(content='width=device-width, initial-scale=1', name='viewport')
+    title= 'Zeus | ' + title
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/style.css', rel='stylesheet')
+    link(rel='stylesheet', href='css/docs.css')
+    // initilize code editor with line number
+    link(rel='stylesheet', href='css/codemirror.css')
+    link(rel='stylesheet', href='css/show-hint.css')
+    link(rel='stylesheet', href='css/fullscreen.css')
+    link(rel='stylesheet', href='css/lint.css')
+    // below css are for code editor's theme
+    link(rel='stylesheet', href='css/3024-day.css')
+    link(rel='stylesheet', href='css/3024-night.css')
+    link(rel='stylesheet', href='css/ambiance.css')
+    link(rel='stylesheet', href='css/base16-dark.css')
+    link(rel='stylesheet', href='css/base16-light.css')
+    link(rel='stylesheet', href='css/blackboard.css')
+    link(rel='stylesheet', href='css/cobalt.css')
+    link(rel='stylesheet', href='css/eclipse.css')
+    link(rel='stylesheet', href='css/elegant.css')
+    link(rel='stylesheet', href='css/erlang-dark.css')
+    link(rel='stylesheet', href='css/lesser-dark.css')
+    link(rel='stylesheet', href='css/mbo.css')
+    link(rel='stylesheet', href='css/mdn-like.css')
+    link(rel='stylesheet', href='css/midnight.css')
+    link(rel='stylesheet', href='css/monokai.css')
+    link(rel='stylesheet', href='css/neat.css')
+    link(rel='stylesheet', href='css/neo.css')
+    link(rel='stylesheet', href='css/night.css')
+    link(rel='stylesheet', href='css/paraiso-dark.css')
+    link(rel='stylesheet', href='css/paraiso-light.css')
+    link(rel='stylesheet', href='css/pastel-on-dark.css')
+    link(rel='stylesheet', href='css/rubyblue.css')
+    link(rel='stylesheet', href='css/solarized.css')
+    link(rel='stylesheet', href='css/the-matrix.css')
+    link(rel='stylesheet', href='css/tomorrow-night-eighties.css')
+    link(rel='stylesheet', href='css/twilight.css')
+    link(rel='stylesheet', href='css/vibrant-ink.css')
+    link(rel='stylesheet', href='css/xq-dark.css')
+    link(rel='stylesheet', href='css/xq-light.css')
+
+    
+    <!--[if lt IE 9 ]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    script(src='js/jquery-2.1.0.min.js')
+    // main code editor library
+    script(src='js/codemirror.js')
+    // code editor feature enhancements
+    script(src='js/closebrackets.js')
+    script(src='js/fullscreen.js')
+    script(src='js/jshints.js')
+    script(src='js/active-line.js')
+    // code editor hint
+    script(src='js/show-hint.js')
+    script(src='js/anyword-hint.js')
+    script(src='js/javascript-hint.js')
+    // lint
+    script(src='js/lint.js')
+    script(src='js/javascript-lint.js')
+    script(src='js/json-lint.js')
+    script(src='js/css-lint.js')
+    // code editor language support
+    script(src='js/javascript.js')
+    script(src='js/xquery.js')
+    script(src='js/xml.js')
+
+  body
+    .container
+      .header
+        ul.nav.nav-pills.pull-right
+          if user
+            li
+              a(href='/dashBoard') DashBoard
+            li
+              a(href='/createdomain') Create Domain
+            li
+              a(href='/createapp') Create Application
+            li
+              a(href='/logout') Logout
+          else
+            li
+              a(href='/login') Login
+        h3.text-muted Zeus PaaS
+      block body
+    script(src='/js/bootstrap.min.js')

@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>		
+
+		<script type="text/javascript">
+
+		function send()
+
+		{
+
+		
+
+				var data = {};
+
+					data.userId = "deep Mehta";
+
+					data.message = "message";
+					data.appName = "some app";
+
+					
+
+					$.ajax({
+
+						type: 'post',
+
+						data: JSON.stringify(data),
+
+				        contentType: 'application/json',
+
+                        url: 'http://54.183.136.139:3006/endpoint',						
+
+                        success: function(data) {
+				//	var temp=JSON.parse(data);
+					alert("success= some = "+data["any"]);
+					$("#dataset").append("user id="+data["some"].userID+" appname="+data["any"]);
+                            console.log('success');
+
+                            console.log(JSON.stringify(data));
+
+                        }
+
+                    });
+
+		}
+		function getsome()
+{
+$.getJSON( 'http://54.183.136.139:3006/endpoint', function () { console.log("success"); } );
+}
+
+		
+
+</script>
+
+</head>
+
+
+
+<body>
+Hello Deep
+<br/>
+<button onclick="send();">
+
+send
+
+</button>
+<br/>
+<button onclick="getsome();">
+
+get
+
+</button>
+<div id="dataset"></div>
+</body>
+
+</html>

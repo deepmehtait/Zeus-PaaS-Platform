@@ -1,0 +1,10 @@
+diff a/views/dashboard.ejs b/views/dashboard.ejs	(rejected hunks)
+@@ -127,7 +127,7 @@
+                     <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                         <div class="icon-bg bg-orange"></div>
+                     </i><span class="menu-title">Dashboard</span></a></li>
+-                    <li><a href="/createNewApplication"><i class="fa fa-asterisk">
++                    <li><a href="Layout.html"><i class="fa fa-asterisk">
+                         <div class="icon-bg bg-pink"></div>
+                     </i><span class="menu-title">Create New Application</span></a>
+                        

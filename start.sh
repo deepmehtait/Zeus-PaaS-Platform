@@ -1,0 +1,4 @@
+
+
+sudo nodemon initApp.js
+

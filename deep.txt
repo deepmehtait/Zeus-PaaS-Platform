@@ -1,0 +1,2 @@
+New task list to complete
+check dynamic auto resoponse from server process.

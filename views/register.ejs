@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>
+      Zeus | Register 
+    </title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/docs.css">
+    <!-- initilize code editor with line number-->
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/show-hint.css">
+    <link rel="stylesheet" href="css/fullscreen.css">
+    <link rel="stylesheet" href="css/lint.css">
+    <!-- below css are for code editor's theme-->
+    <link rel="stylesheet" href="css/3024-day.css">
+    <link rel="stylesheet" href="css/3024-night.css">
+    <link rel="stylesheet" href="css/ambiance.css">
+    <link rel="stylesheet" href="css/base16-dark.css">
+    <link rel="stylesheet" href="css/base16-light.css">
+    <link rel="stylesheet" href="css/blackboard.css">
+    <link rel="stylesheet" href="css/cobalt.css">
+    <link rel="stylesheet" href="css/eclipse.css">
+    <link rel="stylesheet" href="css/elegant.css">
+    <link rel="stylesheet" href="css/erlang-dark.css">
+    <link rel="stylesheet" href="css/lesser-dark.css">
+    <link rel="stylesheet" href="css/mbo.css">
+    <link rel="stylesheet" href="css/mdn-like.css">
+    <link rel="stylesheet" href="css/midnight.css">
+    <link rel="stylesheet" href="css/monokai.css">
+    <link rel="stylesheet" href="css/neat.css">
+    <link rel="stylesheet" href="css/neo.css">
+    <link rel="stylesheet" href="css/night.css">
+    <link rel="stylesheet" href="css/paraiso-dark.css">
+    <link rel="stylesheet" href="css/paraiso-light.css">
+    <link rel="stylesheet" href="css/pastel-on-dark.css">
+    <link rel="stylesheet" href="css/rubyblue.css">
+    <link rel="stylesheet" href="css/solarized.css">
+    <link rel="stylesheet" href="css/the-matrix.css">
+    <link rel="stylesheet" href="css/tomorrow-night-eighties.css">
+    <link rel="stylesheet" href="css/twilight.css">
+    <link rel="stylesheet" href="css/vibrant-ink.css">
+    <link rel="stylesheet" href="css/xq-dark.css">
+    <link rel="stylesheet" href="css/xq-light.css">
+    <!--[if lt IE 9 ]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+</script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+</script>
+<![endif]-->
+  <script src="js/jquery-2.1.0.min.js">
+  </script>
+  <!-- main code editor library-->
+  <script src="js/codemirror.js">
+  </script>
+  <!-- code editor feature enhancements-->
+  <script src="js/closebrackets.js">
+  </script>
+  <script src="js/fullscreen.js">
+  </script>
+  <script src="js/jshints.js">
+  </script>
+  <script src="js/active-line.js">
+  </script>
+  <!-- code editor hint-->
+  <script src="js/show-hint.js">
+  </script>
+  <script src="js/anyword-hint.js">
+  </script>
+  <script src="js/javascript-hint.js">
+  </script>
+  <!-- lint-->
+  <script src="js/lint.js">
+  </script>
+  <script src="js/javascript-lint.js">
+  </script>
+  <script src="js/json-lint.js">
+  </script>
+  <script src="js/css-lint.js">
+  </script>
+  <!-- code editor language support-->
+  <script src="js/javascript.js">
+  </script>
+  <script src="js/xquery.js">
+  </script>
+  <script src="js/xml.js">
+  </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li>
+            <a href="/login">
+              Login
+            </a>
+          </li>
+        </ul>
+        <h3 class="text-muted">
+          Zeus PaaS 
+        </h3>
+      </div>
+      <div class="register">
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <form method="post" action="" class="bs-example form-horizontal">
+              <fieldset>
+                <legend>
+                  Create a New Account
+                </legend>
+                <p>
+                  Registering for this site will create a new user account for you
+                  via 
+                  <a href="https://stormpath.com">
+                    Stormpath
+                  </a>
+                  , then log you in
+                  automatically.
+                </p>
+                <div class="alert alert-dismissable alert-info">
+                  <button data-dismiss="alert" type="button" class="close">
+                    &times;
+                  </button>
+                  <p>
+                    <strong>
+                      NOTE: 
+                    </strong>
+                    Your password must be between 8 and 100 characters, and must
+                    contain lowercase letters, uppercase letters, and numbers.
+                  </p>
+                </div>
+                <div class="form-group">
+                  <label for="username" class="col-lg-4 control-label">
+                    User Name 
+                  </label>
+                  <div class="col-lg-4">
+                    <input id="username" name="username" type="text" placeholder="User Name" autofocus class="form-control"> 
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="col-lg-4 control-label">
+                    Email
+                  </label>
+                  <div class="col-lg-4">
+                    <input id="email" name="email" type="email" placeholder="Email" autofocus class="form-control">
+                  </div>
+                </div>                
+                <div class="form-group">
+                  <label for="password" class="col-lg-4 control-label">
+                    Password
+                  </label>
+                  <div class="col-lg-4">
+                    <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-4 col-lg-offset-4  ">
+                      
+                      
+                      
+                      <% if (typeof message == 'undefined' || message==null) { %>
+								
+								<%} else {%>
+								<%=message%>
+								<%}%>
+                      
+                      
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-4">
+                    <button type="submit" class="btn btn-primary">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p>
+          <img class="lock" src="/img/lock.png"/>
+          &nbsp;
+          <span>
+            Secured By
+          </span>
+          &nbsp;
+          <img src="/img/stormpath.png"/>
+        </p>
+      </footer>
+      <div>
+        &nbsp;
+      </div>
+      <div>
+        &nbsp;
+      </div>
+    </div>
+    <script src="/js/bootstrap.min.js">
+    </script>
+  </body>
+</html>

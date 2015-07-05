@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div  align="center">
+      <h1><%= title %></h1>
+			<br>
+			<br>
+		</div>
+		<div>
+      <a href = "/login">Home</a>
+      <p name="name" >Hi <%= name %></p>
+      <a href="createRepo">Create Repository</button>
+      <h3> Your Repositories </h3>
+      
+      <a href="/repository/<%= repository_list[0] %>"><%= repository_list %></a>
+      <!-- for loop -->
+      <script>
+        var repo_list = <%= repository_list %>;
+        
+				for (repo in repos_list) {
+    			repo;
+				}
+			</script>
+			<!-- for loop unsuccessful -->
+    
+     </div>
+     
+		
+  </body>
+</html>

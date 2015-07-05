@@ -1,0 +1,29 @@
+extends layout
+
+block body
+
+  #welcome.jumbotron
+    h1 Welcome to Zeus PaaS
+    p.lead.
+      <br/>
+      <br/>
+      Welcome to this gloriously simple Platform as a Service that lets you
+    ul
+      li Upload your Node.js project or
+      li.
+        Write code on text editor.
+      li Lastly, deploy it on EC2!
+    <br/>
+    <br/>
+
+    p.
+      <b>NOTE</b>:
+      Refer to our <code>README.md</code> file for more details. For more
+      information, please follow the guide on this project's
+      <a href="https://github.com/utsav2601/Zeus-Paas-Platform">GitHub page</a>.
+    p.bigbutton
+      a.bigbutton.btn.btn-lg.btn-danger(href='/register', role='button') Register
+
+  include footer.jade
+  div &nbsp;
+  div &nbsp;

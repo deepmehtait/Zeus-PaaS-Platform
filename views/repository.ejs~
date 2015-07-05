@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div  align="center">
+      <h1><%= title %></h1>
+		</div>
+		
+		<div style="width:200px;float:left">
+			<h3><%= username %></h3>
+      <!-- for loop -->
+			<p><%= folder_structure %></p>
+			<a href="/repository/<%= repository_name %>/<%= folder_structure[0] %>"+ ><%= folder_structure[0] %></a>
+		</div>
+		
+		
+    <div>
+
+    </div>
+    
+    
+    <div style="float:left">
+    	<form method="post" action="">
+				<h3><%= folder_structure[0] %></h3>
+				<textarea name="content" rows="25" cols="100"><%= file_content %></textarea><br>
+				<input type="submit" value="save"/>
+    	</form>
+    </div>
+    
+		
+  </body>
+</html>
